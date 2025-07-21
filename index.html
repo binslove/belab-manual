@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>비이랩 메뉴얼</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: url("static/background.jpg") no-repeat center center fixed;
+      background-size: cover;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(2px);
+      z-index: 0;
+    }
+
+    header {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 30px;
+      background-color: white;
+      border-bottom: 1px solid #ccc;
+      z-index: 1;
+    }
+
+    .logo {
+      height: 40px;
+    }
+
+    .title {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 28px;
+      font-weight: bold;
+      color: black;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 60px 20px;
+      color: white;
+    }
+
+    .download-btn {
+      background-color: white;
+      color: #333;
+      font-weight: bold;
+      padding: 12px 20px;
+      border: 2px solid #ccc;
+      border-radius: 6px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      margin-bottom: 25px;
+      transition: 0.3s;
+    }
+
+    .download-btn:hover {
+      background-color: #f0f0f0;
+      transform: scale(1.05);
+    }
+
+    form {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    button {
+      width: 180px;
+      height: 50px;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      background-color: white;
+      color: #222;
+      font-weight: bold;
+      transition: 0.2s;
+      white-space: nowrap;
+    }
+
+    button:hover {
+      background-color: #4a148c;
+      color: white;
+      transform: scale(1.05);
+    }
+
+    .result {
+      margin-top: 20px;
+    }
+
+    a {
+      font-size: 16px;
+      color: #f6baff;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 600px) {
+      .title {
+        font-size: 22px;
+      }
+      .download-btn {
+        width: 100%;
+        max-width: 300px;
+      }
+      button {
+        width: 100%;
+        max-width: 300px;
+        font-size: 18px;
+      }
+      .container {
+        padding: 40px 15px;
+      }
+      form {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <img src="static/belab_logo.png" alt="BeLAB 로고" class="logo">
+    <div class="title">비이랩 메뉴얼</div>
+  </header>
+
+  <div class="container">
+
+    <form onsubmit="return false;">
+      <button onclick="openPDF(3)">무선네트워크 연결</button>
+      <button onclick="openPDF(4)">프린터 등록</button>
+      <button onclick="openPDF(5)">SMB설정</button>
+      <button onclick="openPDF(11)">이메일 등록</button>
+      <button onclick="openPDF(12)">복사 방법</button>
+      <button onclick="openPDF(13)">스캔 방법</button>
+    </form>
+
+    <hr>
+
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    function openPDF(page) {
+      const pdfURL = "static/비이랩메뉴얼.pdf#page=" + page;
+      const displayPage = page - 2;  // 오프셋만큼 줄여서 보여줌
+      window.open(pdfURL, '_blank');
+      document.getElementById("result").innerHTML =
+        `<a href="${pdfURL}" target="_blank">🔗 PDF 열기 (${displayPage}페이지)</a>`;
+    }
+  </script>
+
+</body>
+</html>
